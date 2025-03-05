@@ -1,8 +1,9 @@
 "use client";
-
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import Footer from '../../components/Footer';
+import Cart from '../../components/Cart';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,20 @@ export default function Contact() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    // Load cart from localStorage if available
+    const savedCart = localStorage.getItem('piShopCart');
+    if (savedCart) {
+      try {
+        setCart(JSON.parse(savedCart));
+      } catch (error) {
+        console.error('Failed to parse saved cart', error);
+      }
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +51,21 @@ export default function Contact() {
         message: ''
       });
     }, 3000);
+  };
+
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
+  const removeFromCart = (id) => {
+    const updatedCart = cart.filter(item => item.id !== id);
+    setCart(updatedCart);
+    localStorage.setItem('piShopCart', JSON.stringify(updatedCart));
+  };
+
+  const initiatePayment = () => {
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    alert(`Payment of ${total} Pi will be processed through the PiPayment component`);
   };
 
   return (
@@ -242,20 +272,18 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-gray-700">
-        <div className="container mx-auto text-center">
-          <div className="flex justify-center space-x-6 mb-6">
-            <Link href="/about" className="text-gray-400 hover:text-white">About Us</Link>
-            <Link href="/contact" className="text-gray-400 hover:text-white">Contact</Link>
-            <Link href="/privacy" className="text-gray-400 hover:text-white">Privacy Policy</Link>
-            <Link href="/refund" className="text-gray-400 hover:text-white">Refund Policy</Link>
-          </div>
-          <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} Pi Tech Shop - SEASON2077 - All rights reserved
-          </p>
-        </div>
-      </footer>
+      {/* Cart Component */}
+      <Cart 
+        cart={cart} 
+        removeFromCart={removeFromCart} 
+        initiatePayment={initiatePayment} 
+      />
+
+      {/* Footer Navigation */}
+      <Footer 
+        cartCount={cart.length} 
+        openCart={toggleCart} 
+      />
     </div>
   );
 }

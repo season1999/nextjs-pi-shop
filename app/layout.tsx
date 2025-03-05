@@ -20,7 +20,7 @@ export default function RootLayout({
       <head>
         <script src="//code.tidio.co/nn2uytphghc92hoa6taxgdbobsljve7c.js" async></script>
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} pb-16`}>
         <PiAuthProvider>
           {children}
         </PiAuthProvider>

@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
@@ -6,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePiAuth } from '../../../context/PiAuthContext';
 
-// Sample product data
+// Sample product data (unchanged)
 const productsData = {
   'web-design': {
     id: 1,
@@ -154,9 +153,10 @@ export default function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [addedToCart, setAddedToCart] = useState(false);
-  
+  const [cart, setCart] = useState([]); // Added cart state
+
   const slug = params.slug;
-  
+
   useEffect(() => {
     // In a real app, fetch product data from an API
     // For now, we're using the local data
@@ -166,9 +166,19 @@ export default function ProductDetail() {
     setLoading(false);
   }, [slug]);
 
-  const handleAddToCart = () => {
+  const addToCart = (product) => {
+    setCart([...cart, product]);
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 3000);
+  };
+
+  const removeFromCart = (productId) => {
+    setCart(cart.filter(item => item.id !== productId));
+  };
+
+  const initiatePayment = () => {
+    // Placeholder for payment initiation
+    console.log("Initiating payment...");
   };
 
   if (loading) {
@@ -192,7 +202,7 @@ export default function ProductDetail() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-800 to-indigo-900 text-white">
-      {/* Header with Navigation */}
+      {/* Header with Navigation (unchanged) */}
       <header className="pt-6 pb-4 px-6 border-b border-gray-700">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
@@ -218,7 +228,7 @@ export default function ProductDetail() {
         </div>
       </header>
 
-      {/* Breadcrumb */}
+      {/* Breadcrumb (unchanged) */}
       <div className="bg-black/20 py-2">
         <div className="container mx-auto px-6">
           <div className="text-sm">
@@ -249,10 +259,10 @@ export default function ProductDetail() {
             <div className="mb-4 text-purple-300">{product.category}</div>
             <div className="text-3xl font-bold mb-6">{product.price} Pi</div>
             <p className="text-gray-300 mb-8">{product.description}</p>
-            
+
             <div className="space-y-4 mb-8">
               <button 
-                onClick={handleAddToCart}
+                onClick={() => addToCart(product)}
                 className={`w-full py-3 px-4 rounded-lg font-medium ${
                   addedToCart 
                     ? 'bg-green-500 hover:bg-green-600' 
@@ -261,14 +271,14 @@ export default function ProductDetail() {
               >
                 {addedToCart ? '✓ Added to Cart' : 'Add to Cart'}
               </button>
-              
+
               <button 
                 className="w-full py-3 px-4 bg-yellow-400 text-black rounded-lg font-medium hover:bg-yellow-500 transition"
               >
                 Buy Now with Pi
               </button>
             </div>
-            
+
             <div className="border-t border-gray-700 pt-6">
               <h3 className="text-xl font-semibold mb-4">Key Features</h3>
               <ul className="list-disc pl-5 space-y-2">
@@ -280,7 +290,7 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        {/* Deliverables Section */}
+        {/* Deliverables Section (unchanged) */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold mb-6 border-b border-gray-700 pb-2">What You'll Receive</h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -293,7 +303,7 @@ export default function ProductDetail() {
           </ul>
         </div>
 
-        {/* Related Products */}
+        {/* Related Products (unchanged) */}
         <div className="mt-20">
           <h2 className="text-2xl font-bold mb-8">You Might Also Like</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -324,7 +334,12 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Cart Component */}
+      <Cart cart={cart} removeFromCart={removeFromCart} initiatePayment={initiatePayment} />
+
+      {/* Footer Navigation */}
+      <Footer cartCount={cart.length} openCart={() => {}} /> {/* Placeholder openCart */}
+      {/* Footer (unchanged) */}
       <footer className="py-8 px-6 border-t border-gray-700 mt-20">
         <div className="container mx-auto text-center">
           <p className="text-gray-400">
@@ -333,5 +348,36 @@ export default function ProductDetail() {
         </div>
       </footer>
     </div>
+  );
+}
+
+
+// Placeholder components
+function Cart({ cart, removeFromCart, initiatePayment }) {
+  return (
+    <div>
+      <h2>Cart</h2>
+      <ul>
+        {cart.map(item => (
+          <li key={item.id}>
+            {item.name} - {item.price} Pi <button onClick={() => removeFromCart(item.id)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+      {cart.length > 0 && <button onClick={initiatePayment}>Checkout</button>}
+    </div>
+  );
+}
+
+function Footer({ cartCount, openCart }) {
+  return (
+    <footer className="bg-gray-800 p-4">
+      <div className="flex justify-around">
+        <span>🏠</span>
+        <span onClick={openCart}>🛒 ({cartCount})</span>
+        <span>🛍️</span>
+        <span>☎️</span>
+      </div>
+    </footer>
   );
 }
