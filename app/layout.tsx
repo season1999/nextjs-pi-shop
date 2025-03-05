@@ -6,8 +6,8 @@ import { PiAuthProvider } from '../context/PiAuthContext'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'TechHive - AI-Powered Digital Solutions Marketplace',
-  description: 'Browse and purchase digital services powered by AI recommendations',
+  title: 'Pi Tech Shop - SEASON2077',
+  description: 'The futuristic marketplace for Pi Network digital services',
 }
 
 export default function RootLayout({
