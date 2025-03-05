@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -13,7 +12,7 @@ export default function Contact() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -21,7 +20,7 @@ export default function Contact() {
       [name]: value
     }));
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // In a real app, we would send the data to an API
@@ -99,7 +98,7 @@ export default function Contact() {
                     className="w-full p-3 bg-white/10 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block mb-2 font-medium">Email Address</label>
                   <input
@@ -111,7 +110,7 @@ export default function Contact() {
                     className="w-full p-3 bg-white/10 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block mb-2 font-medium">Subject</label>
                   <select
@@ -126,7 +125,7 @@ export default function Contact() {
                     <option value="Partnership Opportunity" className="bg-gray-800">Partnership Opportunity</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block mb-2 font-medium">Your Message</label>
                   <textarea
@@ -138,7 +137,7 @@ export default function Contact() {
                     className="w-full p-3 bg-white/10 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"
                   ></textarea>
                 </div>
-                
+
                 <button 
                   type="submit"
                   className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition"
@@ -148,7 +147,7 @@ export default function Contact() {
               </form>
             )}
           </div>
-          
+
           {/* Contact Info */}
           <div>
             <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
@@ -163,9 +162,10 @@ export default function Contact() {
                   <h3 className="font-semibold mb-1">Email</h3>
                   <p className="text-gray-300">support@pitechshop.pi</p>
                   <p className="text-gray-300">info@pitechshop.pi</p>
+                  <p className="text-gray-300">pitechhive@gmail.com</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start mb-6">
                 <div className="bg-purple-500 p-3 rounded-lg mr-4">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -178,7 +178,7 @@ export default function Contact() {
                   <p className="text-gray-300">Available Mon-Fri, 9am-5pm PST</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <div className="bg-purple-500 p-3 rounded-lg mr-4">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -193,7 +193,7 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-            
+
             <h2 className="text-2xl font-bold mb-6">Support Hours</h2>
             <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
               <div className="flex justify-between mb-3 pb-3 border-b border-gray-700">
@@ -224,14 +224,14 @@ export default function Contact() {
                 Our platform integrates directly with the Pi Network payment system. When you make a purchase, you'll be prompted to authorize the payment through your Pi wallet. Once confirmed, the transaction is processed on the Pi blockchain.
               </p>
             </div>
-            
+
             <div className="mb-6 bg-white/10 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">What if I'm not satisfied with a service?</h3>
               <p className="text-gray-300">
                 We stand behind our services with a satisfaction guarantee. If you're not happy with the delivered work, please contact our support team within 7 days of delivery, and we'll work to resolve the issue or provide a refund as per our refund policy.
               </p>
             </div>
-            
+
             <div className="mb-6 bg-white/10 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">How long does it take to deliver a service?</h3>
               <p className="text-gray-300">

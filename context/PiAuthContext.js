@@ -7,6 +7,7 @@ const PiAuthContext = createContext();
 
 export function PiAuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [userOrders, setUserOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,6 +15,13 @@ export function PiAuthProvider({ children }) {
     // Initialize Pi SDK
     try {
       initPiSdk();
+      
+      // Check for stored user data
+      const storedUser = localStorage.getItem('piUser');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+      
       setLoading(false);
     } catch (err) {
       console.error('Failed to initialize Pi SDK:', err);
@@ -27,11 +35,15 @@ export function PiAuthProvider({ children }) {
     try {
       const authResult = await authenticateWithPi();
       if (authResult) {
-        setUser({
+        const userData = {
           uid: authResult.user.uid,
           username: authResult.user.username,
           accessToken: authResult.accessToken,
-        });
+        };
+        setUser(userData);
+        
+        // Store user data in localStorage
+        localStorage.setItem('piUser', JSON.stringify(userData));
       }
     } catch (err) {
       setError('Authentication failed');
@@ -43,10 +55,24 @@ export function PiAuthProvider({ children }) {
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('piUser');
+  };
+
+  const addOrder = (order) => {
+    const updatedOrders = [...userOrders, order];
+    setUserOrders(updatedOrders);
   };
 
   return (
-    <PiAuthContext.Provider value={{ user, loading, error, login, logout }}>
+    <PiAuthContext.Provider value={{ 
+      user, 
+      loading, 
+      error, 
+      login, 
+      logout,
+      userOrders,
+      addOrder
+    }}>
       {children}
     </PiAuthContext.Provider>
   );
