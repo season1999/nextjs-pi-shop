@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { usePiAuth } from '../context/PiAuthContext';
 import { createPiPayment, completePiPayment } from '../utils/piSdk';
+import Image from 'next/image';
 
 export default function PiPayment() {
   const { user } = usePiAuth();
@@ -68,7 +69,10 @@ export default function PiPayment() {
 
   return (
     <div className="p-4 border rounded-lg shadow-sm">
-      <h2 className="text-xl font-bold mb-4">Pi Payment</h2>
+      <div className="flex items-center gap-2 mb-4">
+        <Image src="/images/pi-logo.jpg" width={30} height={30} alt="Pi Network" className="rounded-full" />
+        <h2 className="text-xl font-bold">Pi Payment</h2>
+      </div>
       
       {error && <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">{error}</div>}
       
@@ -98,9 +102,10 @@ export default function PiPayment() {
         <button 
           onClick={handleCreatePayment}
           disabled={loading}
-          className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:bg-gray-400"
+          className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:bg-gray-400"
         >
-          {loading ? 'Processing...' : 'Create Payment'}
+          <Image src="/images/pi-logo.jpg" width={20} height={20} alt="Pi Network" className="rounded-full" />
+          {loading ? 'Processing...' : 'Pay with Pi'}
         </button>
       ) : paymentStatus === 'created' ? (
         <div>
@@ -110,8 +115,9 @@ export default function PiPayment() {
           <button 
             onClick={handleCompletePayment}
             disabled={loading}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:bg-gray-400"
+            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:bg-gray-400"
           >
+            <Image src="/images/pi-logo.jpg" width={20} height={20} alt="Pi Network" className="rounded-full" />
             {loading ? 'Processing...' : 'Complete Payment'}
           </button>
         </div>

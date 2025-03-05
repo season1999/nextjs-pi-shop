@@ -60,6 +60,7 @@ export default function Home() {
           <nav className="hidden md:flex items-center space-x-6 text-sm">
             <Link href="/" className="hover:text-purple-300 transition">Home</Link>
             <Link href="/shop" className="hover:text-purple-300 transition">Shop Now</Link>
+            <Link href="/profile" className="hover:text-purple-300 transition">My Profile</Link>
             <Link href="/about" className="hover:text-purple-300 transition">About Us</Link>
             <Link href="/contact" className="hover:text-purple-300 transition">Contact</Link>
             <Link href="/mission" className="hover:text-purple-300 transition">Mission & Vision</Link>
