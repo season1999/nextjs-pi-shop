@@ -1,8 +1,8 @@
 {
+  "/not-found": "app/not-found.js",
   "/page": "app/page.js",
-  "/product/[slug]/page": "app/product/[slug]/page.js",
+  "/api/hello/route": "app/api/hello/route.js",
+  "/shop/page": "app/shop/page.js",
   "/profile/page": "app/profile/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/api/hello/route": "app/api/hello/route.js"
+  "/contact/page": "app/contact/page.js"
 }

@@ -6,12 +6,15 @@ import Link from 'next/link';
 import PiAuth from "../components/PiAuth";
 import { usePiAuth } from "../context/PiAuthContext";
 import PiPayment from "../components/PiPayment";
+import Cart from "../components/Cart";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const { user } = usePiAuth();
   const [services, setServices] = useState([]);
   const [cart, setCart] = useState([]);
   const [recommendation, setRecommendation] = useState('');
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   // Sample services data
   const sampleServices = [
@@ -26,6 +29,16 @@ export default function Home() {
   useEffect(() => {
     // Fetch services (using sample data for now)
     setServices(sampleServices);
+    
+    // Load cart from localStorage if available
+    const savedCart = localStorage.getItem('piShopCart');
+    if (savedCart) {
+      try {
+        setCart(JSON.parse(savedCart));
+      } catch (error) {
+        console.error('Failed to parse saved cart', error);
+      }
+    }
 
     // AI Recommendation (mock for now, replace with OpenAI API call)
     fetch('/api/hello')
@@ -33,12 +46,25 @@ export default function Home() {
       .then(data => setRecommendation(data.recommendation || "Based on your profile, we recommend starting with our Web Design package and SEO Optimization to maximize your online presence."));
   }, []);
 
-  const addToCart = (service) => setCart([...cart, service]);
-  const removeFromCart = (id) => setCart(cart.filter(item => item.id !== id));
+  const addToCart = (service) => {
+    const updatedCart = [...cart, service];
+    setCart(updatedCart);
+    localStorage.setItem('piShopCart', JSON.stringify(updatedCart));
+  };
+  
+  const removeFromCart = (id) => {
+    const updatedCart = cart.filter(item => item.id !== id);
+    setCart(updatedCart);
+    localStorage.setItem('piShopCart', JSON.stringify(updatedCart));
+  };
 
   const initiatePayment = () => {
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     alert(`Payment of ${total} Pi will be processed through the PiPayment component`);
+  };
+  
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
   };
 
   return (
@@ -136,27 +162,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Cart Section */}
-      {cart.length > 0 && (
-        <section className="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 shadow-lg">
-          <h3 className="text-xl font-bold">Your Cart ({cart.length})</h3>
-          <ul className="max-h-40 overflow-y-auto">
-            {cart.map((item, index) => (
-              <li key={index} className="flex justify-between py-2">
-                <span>{item.name} - {item.price} Pi</span>
-                <button onClick={() => removeFromCart(item.id)} className="text-red-400">Remove</button>
-              </li>
-            ))}
-          </ul>
-          <p className="text-lg font-bold">Total: {cart.reduce((sum, item) => sum + item.price, 0)} Pi</p>
-          <button
-            onClick={initiatePayment}
-            className="mt-2 bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
-          >
-            Checkout with Pi
-          </button>
-        </section>
-      )}
+      {/* Cart Component */}
+      <Cart 
+        cart={cart} 
+        removeFromCart={removeFromCart} 
+        initiatePayment={initiatePayment} 
+      />
+      
+      {/* Footer Navigation */}
+      <Footer 
+        cartCount={cart.length} 
+        openCart={toggleCart} 
+      />
 
       {/* Live Chat (Placeholder) */}
       <div className="fixed bottom-16 right-4">

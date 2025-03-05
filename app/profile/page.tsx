@@ -4,11 +4,30 @@ import { useState, useEffect } from 'react';
 import { usePiAuth } from '../../context/PiAuthContext';
 import Image from 'next/image';
 import Link from 'next/link';
+import Footer from '../../components/Footer';
+import Cart from '../../components/Cart';
 
 export default function ProfilePage() {
   const { user } = usePiAuth();
   const [orders, setOrders] = useState([]);
   const [activeTab, setActiveTab] = useState('orders');
+  const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+  
+  const removeFromCart = (id) => {
+    const updatedCart = cart.filter(item => item.id !== id);
+    setCart(updatedCart);
+    localStorage.setItem('piShopCart', JSON.stringify(updatedCart));
+  };
+  
+  const initiatePayment = () => {
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    alert(`Payment of ${total} Pi will be processed through the PiPayment component`);
+  };
 
   useEffect(() => {
     // Mock orders data - in a real app, this would fetch from an API
@@ -33,6 +52,16 @@ export default function ProfilePage() {
           ]
         }
       ]);
+    }
+    
+    // Load cart from localStorage if available
+    const savedCart = localStorage.getItem('piShopCart');
+    if (savedCart) {
+      try {
+        setCart(JSON.parse(savedCart));
+      } catch (error) {
+        console.error('Failed to parse saved cart', error);
+      }
     }
   }, [user]);
 
@@ -169,6 +198,19 @@ export default function ProfilePage() {
           )}
         </div>
       </div>
+      
+      {/* Cart Component */}
+      <Cart 
+        cart={cart} 
+        removeFromCart={removeFromCart} 
+        initiatePayment={initiatePayment} 
+      />
+      
+      {/* Footer Navigation */}
+      <Footer 
+        cartCount={cart.length} 
+        openCart={toggleCart} 
+      />
     </main>
   );
 }
