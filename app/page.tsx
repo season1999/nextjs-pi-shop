@@ -15,12 +15,12 @@ export default function Home() {
 
   // Sample services data
   const sampleServices = [
-    { id: 1, name: 'Web Design', price: 50, category: 'Design', image: '/pitech-logo.jpg', slug: 'web-design' },
-    { id: 2, name: 'Mobile App Development', price: 100, category: 'Development', image: '/images/mobile-app.jpg', slug: 'mobile-app' },
-    { id: 3, name: 'Data Analytics', price: 80, category: 'Analytics', image: '/images/data-analytics.jpg', slug: 'data-analytics' },
+    { id: 1, name: 'Web Design', price: 50, category: 'Design', image: '/images/ui-workspace.jpg', slug: 'web-design' },
+    { id: 2, name: 'Mobile App Development', price: 100, category: 'Development', image: '/images/mobile-design.jpg', slug: 'mobile-app' },
+    { id: 3, name: 'Data Analytics', price: 80, category: 'Analytics', image: '/images/data-dashboard.jpg', slug: 'data-analytics' },
     { id: 4, name: 'Digital Marketing', price: 70, category: 'Marketing', image: '/images/tech-tree.jpg', slug: 'digital-marketing' },
     { id: 5, name: 'UI/UX Design', price: 60, category: 'Design', image: '/images/ui-design.jpg', slug: 'ui-design' },
-    { id: 6, name: 'Logo Design', price: 40, category: 'Design', image: '/pitech-logo.jpg', slug: 'logo-design' },
+    { id: 6, name: 'SEO Optimization', price: 45, category: 'Marketing', image: '/images/seo-tree.jpg', slug: 'seo-optimization' },
   ];
 
   useEffect(() => {

@@ -17,6 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script src="//code.tidio.co/nn2uytphghc92hoa6taxgdbobsljve7c.js" async></script>
+      </head>
       <body className={inter.className}>
         <PiAuthProvider>
           {children}

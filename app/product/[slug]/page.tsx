@@ -123,20 +123,20 @@ const productsData = {
       'Design system components'
     ]
   },
-  'logo-design': {
+  'seo-optimization': {
     id: 6,
-    name: 'Logo Design',
-    price: 40,
-    category: 'Design',
-    image: '/pitech-logo.jpg',
-    description: 'Professional logo design services to create a unique visual identity for your brand. Our designers will craft a distinctive and memorable logo that represents your brand values and resonates with your target audience.',
+    name: 'SEO Optimization',
+    price: 45,
+    category: 'Marketing',
+    image: '/images/seo-tree.jpg',
+    description: 'Comprehensive SEO services to improve your website\'s visibility in search engines. Our SEO experts will optimize your website structure, content, and backlink profile to increase organic traffic and improve your search engine rankings.',
     features: [
-      'Brand analysis',
-      'Concept development',
-      'Multiple design concepts',
-      'Color psychology application',
-      'Typography selection',
-      'Scalable vector format'
+      'Keyword research and analysis',
+      'On-page SEO optimization',
+      'Technical SEO audit',
+      'Content optimization',
+      'Backlink strategy',
+      'Performance tracking'
     ],
     deliverables: [
       'Final logo in various formats (PNG, JPG, SVG)',
