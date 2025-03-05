@@ -14,10 +14,10 @@ export default function Home() {
 
   // Sample services data
   const sampleServices = [
-    { id: 1, name: 'Web Design', price: 50, category: 'Design', image: '/vercel.svg' },
-    { id: 2, name: 'Mobile App Development', price: 100, category: 'Development', image: '/vercel.svg' },
-    { id: 3, name: 'SEO Optimization', price: 30, category: 'Marketing', image: '/vercel.svg' },
-    { id: 4, name: 'Digital Marketing', price: 70, category: 'Marketing', image: '/vercel.svg' },
+    { id: 1, name: 'Web Design', price: 50, category: 'Design', image: '/pitech-logo.jpg' },
+    { id: 2, name: 'Mobile App Development', price: 100, category: 'Development', image: '/pitech-logo.jpg' },
+    { id: 3, name: 'SEO Optimization', price: 30, category: 'Marketing', image: '/pitech-logo.jpg' },
+    { id: 4, name: 'Digital Marketing', price: 70, category: 'Marketing', image: '/pitech-logo.jpg' },
   ];
 
   useEffect(() => {
@@ -45,14 +45,14 @@ export default function Home() {
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <Image
-              src="/vercel.svg"
-              alt="TechHive Logo"
-              className="dark:invert mr-2"
-              width={120}
-              height={24}
+              src="/pitech-logo.jpg"
+              alt="Pi Tech Shop Logo"
+              width={50}
+              height={50}
+              className="mr-2 rounded-md"
               priority
             />
-            <h1 className="text-2xl font-bold ml-2">TechHive</h1>
+            <h1 className="text-2xl font-bold ml-2">Pi Tech Shop</h1>
           </div>
           <div>
             <PiAuth />
@@ -62,7 +62,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="text-center py-16 px-6">
-        <h2 className="text-5xl font-extrabold mb-4 animate-pulse">Your One-Stop Digital Solutions Marketplace</h2>
+        <h2 className="text-5xl font-extrabold mb-4 animate-pulse">Pi Tech Shop - SEASON2077</h2>
         <p className="text-xl mb-6">Powered by AI, Built for You</p>
         <button className="bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-500">Explore Services</button>
       </section>
@@ -156,7 +156,7 @@ export default function Home() {
       <footer className="py-8 px-6 border-t border-gray-700">
         <div className="container mx-auto text-center">
           <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} TechHive - All rights reserved
+            &copy; {new Date().getFullYear()} Pi Tech Shop - SEASON2077 - All rights reserved
           </p>
         </div>
       </footer>
