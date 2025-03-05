@@ -26,7 +26,7 @@ export default function Footer({ cartCount = 0, openCart }) {
       </button>
 
       <button
-        onClick={openCart}
+        onClick={() => router.push('/cart')}
         className="flex flex-col items-center text-gray-300 hover:text-white relative"
       >
         <span className="text-xl">🛒</span>

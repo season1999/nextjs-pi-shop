@@ -163,11 +163,13 @@ export default function Home() {
       </section>
 
       {/* Cart Component */}
-      <Cart 
-        cart={cart} 
-        removeFromCart={removeFromCart} 
-        initiatePayment={initiatePayment} 
-      />
+      <button 
+        onClick={() => setIsCartOpen(true)}
+        className="cart-toggle fixed bottom-20 right-4 bg-purple-600 text-white p-3 rounded-full shadow-lg z-40 lg:hidden"
+        aria-label="View cart"
+      >
+        🛒 {cart.length > 0 && <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cart.length}</span>}
+      </button>
       
       {/* Footer Navigation */}
       <Footer 

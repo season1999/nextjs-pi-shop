@@ -1,7 +1,8 @@
 {
   "/page": "app/page.js",
+  "/cart/page": "app/cart/page.js",
   "/shop/page": "app/shop/page.js",
-  "/api/hello/route": "app/api/hello/route.js",
   "/signin/page": "app/signin/page.js",
-  "/profile/page": "app/profile/page.js"
+  "/contact/page": "app/contact/page.js",
+  "/api/hello/route": "app/api/hello/route.js"
 }
