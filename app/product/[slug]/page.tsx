@@ -338,7 +338,7 @@ export default function ProductDetail() {
       <Cart cart={cart} removeFromCart={removeFromCart} initiatePayment={initiatePayment} />
 
       {/* Footer Navigation */}
-      <Footer cartCount={cart.length} openCart={() => {}} /> {/* Placeholder openCart */}
+      <Footer cartCount={cart.length} openCart={() => setIsCartOpen(true)} />
       {/* Footer (unchanged) */}
       <footer className="py-8 px-6 border-t border-gray-700 mt-20">
         <div className="container mx-auto text-center">
