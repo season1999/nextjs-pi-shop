@@ -7,7 +7,7 @@ import PiAuth from "../components/PiAuth";
 import { usePiAuth } from "../context/PiAuthContext";
 import PiPayment from "../components/PiPayment";
 import Cart from "../components/Cart";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer.js";
 
 export default function Home() {
   const { user } = usePiAuth();
