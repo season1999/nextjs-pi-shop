@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import PiAuth from "../components/PiAuth";
 import { usePiAuth } from "../context/PiAuthContext";
 import PiPayment from "../components/PiPayment";
@@ -14,10 +15,12 @@ export default function Home() {
 
   // Sample services data
   const sampleServices = [
-    { id: 1, name: 'Web Design', price: 50, category: 'Design', image: '/pitech-logo.jpg' },
-    { id: 2, name: 'Mobile App Development', price: 100, category: 'Development', image: '/pitech-logo.jpg' },
-    { id: 3, name: 'SEO Optimization', price: 30, category: 'Marketing', image: '/pitech-logo.jpg' },
-    { id: 4, name: 'Digital Marketing', price: 70, category: 'Marketing', image: '/pitech-logo.jpg' },
+    { id: 1, name: 'Web Design', price: 50, category: 'Design', image: '/pitech-logo.jpg', slug: 'web-design' },
+    { id: 2, name: 'Mobile App Development', price: 100, category: 'Development', image: '/images/mobile-app.jpg', slug: 'mobile-app' },
+    { id: 3, name: 'Data Analytics', price: 80, category: 'Analytics', image: '/images/data-analytics.jpg', slug: 'data-analytics' },
+    { id: 4, name: 'Digital Marketing', price: 70, category: 'Marketing', image: '/images/tech-tree.jpg', slug: 'digital-marketing' },
+    { id: 5, name: 'UI/UX Design', price: 60, category: 'Design', image: '/images/ui-design.jpg', slug: 'ui-design' },
+    { id: 6, name: 'Logo Design', price: 40, category: 'Design', image: '/pitech-logo.jpg', slug: 'logo-design' },
   ];
 
   useEffect(() => {
@@ -54,6 +57,13 @@ export default function Home() {
             />
             <h1 className="text-2xl font-bold ml-2">Pi Tech Shop</h1>
           </div>
+          <nav className="hidden md:flex items-center space-x-6 text-sm">
+            <Link href="/" className="hover:text-purple-300 transition">Home</Link>
+            <Link href="/shop" className="hover:text-purple-300 transition">Shop Now</Link>
+            <Link href="/about" className="hover:text-purple-300 transition">About Us</Link>
+            <Link href="/contact" className="hover:text-purple-300 transition">Contact</Link>
+            <Link href="/mission" className="hover:text-purple-300 transition">Mission & Vision</Link>
+          </nav>
           <div>
             <PiAuth />
           </div>
@@ -78,23 +88,37 @@ export default function Home() {
       {/* Services Section */}
       <section className="py-12 px-6">
         <h3 className="text-3xl font-bold text-center mb-8">Browse Our Services</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map(service => (
             <div key={service.id} className="bg-white/10 backdrop-blur-sm p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-              <div className="bg-slate-200 p-4 rounded-lg flex items-center justify-center h-40">
-                <Image src={service.image} alt={service.name} width={100} height={24} className="rounded-t-lg" />
+              <div className="bg-slate-200 p-4 rounded-lg flex items-center justify-center h-48">
+                <Image src={service.image} alt={service.name} width={180} height={120} className="rounded-lg object-cover" />
               </div>
               <h4 className="text-xl font-semibold mt-4">{service.name}</h4>
               <p className="text-gray-300">{service.category}</p>
               <p className="text-lg font-bold mt-2">{service.price} Pi</p>
-              <button
-                onClick={() => addToCart(service)}
-                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full"
-              >
-                Add to Cart
-              </button>
+              <div className="flex space-x-2 mt-4">
+                <button
+                  onClick={() => addToCart(service)}
+                  className="flex-1 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  Add to Cart
+                </button>
+                <Link 
+                  href={`/product/${service.slug}`}
+                  className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
+                >
+                  View Details
+                </Link>
+              </div>
             </div>
           ))}
+        </div>
+        <div className="text-center mt-10">
+          <Link href="/shop" 
+            className="inline-block bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-500 transition">
+            View All Products
+          </Link>
         </div>
       </section>
 
