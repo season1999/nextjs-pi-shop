@@ -1,5 +1,8 @@
 {
   "/page": "app/page.js",
-  "/api/hello/route": "app/api/hello/route.js",
-  "/profile/page": "app/profile/page.js"
+  "/product/[slug]/page": "app/product/[slug]/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/hello/route": "app/api/hello/route.js"
 }
